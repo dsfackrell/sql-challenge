@@ -1,0 +1,46 @@
+CREATE TABLE Departments (
+	Dept_No VARCHAR NOT NULL,
+	Name VARCHAR NOT NULL,
+	PRIMARY KEY (Dept_No)
+);
+
+CREATE TABLE Titles (
+	Title_ID VARCHAR NOT NULL,
+	Title VARCHAR NOT NULL,
+	PRIMARY KEY (Title_ID)
+);
+
+CREATE TABLE Employees(
+	Emp_No INT NOT NULL,
+	Emp_Title_ID VARCHAR NOT NULL,
+	Birth_Date DATE NOT NULL,
+	First_Name VARCHAR NOT NULL,
+	Last_Name VARCHAR NOT NULL,
+	Sex VARCHAR NOT NULL,
+	Hire_Date DATE NOT NULL,
+	FOREIGN KEY (Emp_Title_ID) REFERENCES Titles (Title_ID),
+	PRIMARY KEY (Emp_No)
+);
+
+CREATE TABLE Dept_Manager(
+	Dept_No VARCHAR NOT NULL,
+	Emp_No INT NOT NULL,
+	FOREIGN KEY (Dept_No) REFERENCES Departments (Dept_No),
+	FOREIGN KEY (Emp_No) REFERENCES Employees (Emp_No),
+	PRIMARY KEY (Dept_No, Emp_No)
+);
+
+CREATE TABLE Salaries(
+	Emp_No INT NOT NULL,
+	Salary INT NOT NULL,
+	FOREIGN KEY (Emp_No) REFERENCES Employees (Emp_No),
+	PRIMARY KEY (Emp_No)
+);
+
+CREATE TABLE Dept_Emp(
+	Emp_No INT NOT NULL,
+	Dept_No VARCHAR NOT NULL,
+	FOREIGN KEY (Emp_No) REFERENCES Employees (Emp_No),
+	FOREIGN KEY (Dept_No) REFERENCES Departments (Dept_No),
+	PRIMARY KEY (Dept_No, Emp_No)
+);
